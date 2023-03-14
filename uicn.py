@@ -23,7 +23,6 @@ estaciones=pd.read_html('https://docs.google.com/spreadsheets/d/1F6mHPGmC05MUcat
 
 estaciones=estaciones[0]
 
-
 for i in range(0,14):
     
    # print(estaciones['Estación'].iloc[i])
@@ -35,14 +34,10 @@ for i in range(0,14):
                   popup=popup
                   ).add_to(my_map) 
 
-
-
 def random_color(feature):
     return {'fillColor': f"#{random.randint(0, 0xFFFFFF):06x}", 'color': '#000000',
                             'fillOpacity': 0.4,
                             'weight':0.8}
-
-
 
 folium.GeoJson(
     areaintervencion, name="Área Intervención UICN",
@@ -70,7 +65,6 @@ folium.GeoJson(
 ).add_to(my_map)
 
 
-
 folium.GeoJson(
     area, name="Área de estudio ADIPO",
     style_function=random_color,
@@ -82,9 +76,6 @@ folium.GeoJson(
         style=("background-color: white; color: #000000; font-family: arial; font-size: 12px; padding: 10px;") 
     ), 
 ).add_to(my_map)
-
-
-
 
 folium.LayerControl(position="bottomright").add_to(my_map)
 
