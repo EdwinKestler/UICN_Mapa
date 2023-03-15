@@ -24,16 +24,14 @@ estaciones=pd.read_html('https://docs.google.com/spreadsheets/d/1F6mHPGmC05MUcat
 estaciones=estaciones[0]
 
 for i in range(0,14):
+    popup = estaciones['Estación'].iloc[i]
+    color = 'green' if estaciones['Estado'].iloc[i] == 'Instalada' else 'red'
+    folium.Marker(
+        location=[estaciones['Latitud'].iloc[i], estaciones['Longitud'].iloc[i]],
+        popup=popup,
+        icon=folium.Icon(color=color)
+    ).add_to(my_map) 
     
-   # print(estaciones['Estación'].iloc[i])
-
-    
-    #popup = folium.Popup(iframe,parse_html=True)
-    popup=estaciones['Estación'].iloc[i]
-    folium.Marker([estaciones['Latitud'].iloc[i],estaciones['Longitud'].iloc[i]],
-                  popup=popup
-                  ).add_to(my_map) 
-
 def random_color(feature):
     return {'fillColor': f"#{random.randint(0, 0xFFFFFF):06x}", 'color': '#000000',
                             'fillOpacity': 0.4,
