@@ -35,7 +35,24 @@ def add_geojson_to_map(m, geojson_files):
         geojson_path = geojson_info['path']
         layer_name = geojson_info['name']
         fields = geojson_info['fields']
-        
+
+        # Load the GeoJSON file
+        with open(geojson_path, 'r', encoding='utf-8') as f:
+            geo_data = json.load(f)
+
+        # Add the GeoJSON layer to the map
+        folium.GeoJson(
+            geo_data, 
+            name=layer_name,
+            style_function=random_color,
+            show=True,
+            embed=True,
+            tooltip=folium.features.GeoJsonTooltip(
+                fields=fields,
+                aliases=[''] * len(fields),
+                style=("background-color: white; color: #000000; font-family: arial; font-size: 12px; padding: 10px;")
+            )
+        ).add_to(m)
 
 def main():
     boulder_coords = [15.1, -91.3]
